@@ -11,20 +11,47 @@ use config::JsonConfig;
 
 fn main() -> std::io::Result<()> {
 
-    let config: Value = JsonConfig::new("./config.json").get_value();
+    let config: Value = JsonConfig::new(r"./config.json").unwrap().get_value();
 
-    let folder_path = config["folderPath"].clone();
-    let entry_file = config["entryFile"].clone();
-    let port = &*config["port"].clone().as_u64().unwrap().to_string();
-    let bind_str = "127.0.0.1:".to_string() + port;
+    let folder_path = config.get("folderPath")
+                        .map(|val| {
+                            if let Some(text) = val.as_str() {
+                                text.to_string()
+                            } else {
+                                "./static/".to_string()
+                            }
+                        })
+                        .unwrap_or("./static/".to_string());
+
+    let entry_file = config.get("entryFile")
+                        .map(|val| {
+                            if let Some(text) = val.as_str() {
+                                text.to_string()
+                            } else {
+                                "index.html".to_string()
+                            }
+                        })
+                        .unwrap_or("index.html".to_string());
+
+    let port = config.get("port")
+                        .map(|val| {
+                            if let Some(number) = val.as_u64() {
+                                number
+                            } else {
+                                3000
+                            }
+                        })
+                        .unwrap_or(3000);
+
+    let bind_str = &*format!("127.0.0.1:{}", port);
 
     println!("Server for index.html is listening on port {}！", port);
 
     HttpServer::new(move || {
        App::new()
         .service(
-            Files::new("/", folder_path.as_str().unwrap()).index_file(entry_file.as_str().unwrap())
-        ) 
+            Files::new("/", &*folder_path).index_file(&*entry_file)
+        )
     })
     .bind(bind_str)?
     .run()

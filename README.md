@@ -1,2 +1,2 @@
 # index-html-server
-Server for index.html.
+Server for index.html
