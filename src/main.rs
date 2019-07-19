@@ -1,17 +1,31 @@
 extern crate actix_web;
 extern crate actix_files;
 extern crate serde_json;
+extern crate clap;
 
 mod config;
 
 use actix_web::{HttpServer, App};
 use actix_files::Files;
 use serde_json::Value;
+use clap::{App as ClapApp, Arg};
 use config::JsonConfig;
 
 fn main() -> std::io::Result<()> {
 
-    let config: Value = JsonConfig::new(r"./config.json").unwrap().get_value();
+    let matches = ClapApp::new("index-html-server")
+                    .arg(
+                        Arg::with_name("config")
+                            .short("c")
+                            .long("config")
+                            .help("Set a custom json config file")
+                            .takes_value(true)
+                    )
+                    .get_matches();
+                
+    let config_path = matches.value_of("config").unwrap_or("./config.json");
+
+    let config: Value = JsonConfig::new(config_path).unwrap().get_value();
 
     let folder_path = config.get("folderPath")
                         .map(|val| {

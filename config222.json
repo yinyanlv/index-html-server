@@ -1,0 +1,5 @@
+{
+    "folderPath": "./static/",
+    "entryFile": "index.html", 
+    "port": 5555
+}
