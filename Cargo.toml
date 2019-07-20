@@ -4,6 +4,13 @@ version = "0.1.0"
 authors = ["yinyanlv <yanlv.yin@gmail.com>"]
 edition = "2018"
 
+description = "Server for index.html"
+keywords = ["server", "index.html", "static"]
+repository = "https://github.com/yinyanlv/index-html-server"
+homepage = "https://github.com/yinyanlv/index-html-server"
+readme = "README.md"
+license = "MIT"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
