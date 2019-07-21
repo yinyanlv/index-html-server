@@ -20,6 +20,6 @@ index-html-server --config ../../abc/custom_config.json
 或
 index-html-server -c ../../abc/custom_config.json
 ```
-**备注**：可将本项目的可执行文件添加到操作系统环境变量中，这样就可以在命令行中直接使用index-html-server。
+**备注**：可将本项目的可执行文件添加到操作系统环境变量中，这样就可以在命令行中全局使用index-html-server。
 
 
