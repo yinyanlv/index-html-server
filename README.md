@@ -12,14 +12,14 @@ Server for index.html。在不需要安装其它依赖的情况下，为React、
 | port | 服务器端口号（默认：8000）
 
 ## 自定义配置
-创建并编辑config.json文件（相关配置项如上），然后，将该配置文件放置到本项目可执行文件所在的文件夹下。
+创建并编辑config.json文件（相关配置项如上），然后，将该配置文件放置到本项目可执行文件所在的文件夹下，最后，执行本项目的可执行文件即可。
 
 **通过命令行，可自定义配置文件的名称和路径**，用法如下：
 ```
-index-html-server --config ../../abc/custome_config.json
+index-html-server --config ../../abc/custom_config.json
 或
-index-html-server -c ../../abc/custome_config.json
+index-html-server -c ../../abc/custom_config.json
 ```
-**备注：**可将本项目的可执行文件添加到系统环境变量中，这样就可以在命令行中直接使用index-html-server。
+**备注**：可将本项目的可执行文件添加到操作系统环境变量中，这样就可以在命令行中直接使用index-html-server。
 
 
