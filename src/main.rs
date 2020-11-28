@@ -36,7 +36,7 @@ lazy_static! {
                     JsonConfig::new(default_path).unwrap().get_value()
                 } else {
                     json!({
-                        "folderPath": "./static/",
+                        "folderPath": "./build/",
                         "entryFile": "index.html", 
                         "port": 8000
                     })
@@ -51,10 +51,10 @@ lazy_static! {
                 if let Some(text) = val.as_str() {
                     text.to_string()
                 } else {
-                    "./static/".to_string()
+                    "./build/".to_string()
                 }
             })
-            .unwrap_or("./static/".to_string())
+            .unwrap_or("./build/".to_string())
     };
 
     static ref ENTRY_FILE: String = {
@@ -67,6 +67,18 @@ lazy_static! {
                 }
             })
             .unwrap_or("index.html".to_string())
+    };
+
+    static ref HOST: String = {
+        CONFIG.get("host")
+            .map(|val| {
+                if let Some(text) = val.as_str() {
+                    text.to_string()
+                } else {
+                    "127.0.0.1".to_string()
+                }
+            })
+            .unwrap_or("127.0.0.1".to_string())
     };
 
     static ref PORT: u64 = {
@@ -84,7 +96,7 @@ lazy_static! {
 
 fn main() -> std::io::Result<()> {
 
-    let bind_str = &*format!("127.0.0.1:{}", PORT.to_string());
+    let bind_str = &*format!("{}:{}", HOST.to_string(), PORT.to_string());
 
     println!("Server for index.html is listening on port {}！", PORT.to_string());
 

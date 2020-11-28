@@ -7,8 +7,9 @@ Server for index.html。在不需要安装其它依赖的情况下，为React、
 ## 配置项
 | 属性 | 说明 |
 | - | - |
-| folderPath | 静态文件夹路径（默认：./static/）
+| folderPath | 静态文件夹路径（默认：./build/）
 | entryFile | 网站入口文件（默认：index.html）
+| host | 服务器ip（默认：127.0.0.1）
 | port | 服务器端口号（默认：8000）
 
 ## 自定义配置
